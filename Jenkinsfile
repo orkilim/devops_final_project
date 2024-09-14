@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_APP = "worldofgames-web"
+        DOCKER_APP = "devops-devops_final_project-web"//"worldofgames-web"
         DOCKER_IMAGE = """orkilim/${DOCKER_APP}"""
         DOCKER_TAG = "latest"
         DOCKER_PORT = "8777"
@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     dir('devops_final_project') {
-                    // Run Selenium tests using e2e.py (this should exist in your repo)
+
                     try {
                         bat 'cd tests && python e2e.py'
                     } catch (Exception e) {
@@ -73,7 +73,7 @@ pipeline {
                         bat """docker tag ${DOCKER_IMAGE} ${DOCKER_IMAGE}:${DOCKER_TAG}"""
 
                         // Push the image to the user's DockerHub account
-                        bat """docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"""
+                        bat """docker push ${DOCKER_APP}:${DOCKER_TAG}"""
                     }
                 }
             }

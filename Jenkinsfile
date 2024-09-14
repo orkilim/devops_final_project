@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    bat """docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."""
+                    bat """docker-compose -f docker-compose.yml build"""
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                     // Run the Docker container, expose port 8777, and mount dummy Scores.txt
                     bat """
                         echo "0" > dummy_scores.txt
-                        docker-compose -f Docker-compose.yml up -d --build
+                        docker-compose -f docker-compose.yml up -d
                     """
                         //docker run -d -p ${DOCKER_PORT}:5000 --name worldofgames-test -v %cd%\\dummy_scores.txt:/Scores.txt ${DOCKER_IMAGE}:${DOCKER_TAG}
                 }
@@ -59,7 +59,8 @@ pipeline {
             steps {
                 script {
                     // Stop the container
-                    bat 'docker stop world-of-games-container && docker rm world-of-games-container'
+                    bat 'docker-compose -f docker-compose.yml down'
+                    //bat 'docker stop world-of-games-container && docker rm world-of-games-container'
 
                     // Ask the user for their DockerHub credentials and push the image
                     withCredentials([string(credentialsId: 'docker-hub-username', variable: 'DOCKER_HUB_USERNAME'),

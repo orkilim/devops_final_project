@@ -8,7 +8,7 @@ services:
     container_name: world-of-games-container
 
     ports:
-      - "5000:5000"
+      - "8777:5000"
 
     environment:
       - FLASK_APP=MainScores.py
@@ -17,3 +17,4 @@ services:
 
     volumes:
       - .:/app
+      - ./dummy_scores.txt:/app/Scores.txt

@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_APP = "devops-devops_final_project-web"//"worldofgames-web"
+        DOCKER_APP = "devops_final_project-web"//"worldofgames-web"
         DOCKER_IMAGE = """orkilim/${DOCKER_APP}"""
         DOCKER_TAG = "latest"
         DOCKER_PORT = "8777"
